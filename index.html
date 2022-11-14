@@ -8,6 +8,44 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hola Mundo!!</h1>
+    <!-- TITLE -->
+    <div class="title">
+
+    </div>
+    <!-- NAV -->
+    <div class="nav">
+        <div class="selection"></div>
+        <div class="social"></div>
+    </div>
+
+    <!-- CARD -->
+
+    <div class="cards">
+        <div class="card c1">
+            <p class="crono-p">CRONOMETRO</p>
+
+            <div class="contenedor">
+                
+                <div class="reloj" id="Horas">00</div>
+                <div class="reloj" id="Minutos">:00</div>
+                <div class="reloj" id="Segundos">:00</div>
+                <div class="reloj" id="Centesimas">:00</div>
+            </div>
+            <div class="timer-btn">
+                <input type="button" class="boton" id="inicio" value="Start &#9658;" onclick="inicio();">
+                <input type="button" class="boton" id="parar" value="Stop &#8718;" onclick="parar();" disabled>
+                <input type="button" class="boton" id="continuar" value="Resume &#8634;" onclick="inicio();" disabled>
+                <input type="button" class="boton" id="reinicio" value="Reset &#8635;" onclick="reinicio();" disabled>
+            </div>
+        </div>
+        <div class="card c2">
+            <p>TEMPORIZADOR</p>
+        </div>
+        <div class="card c3">
+            <p>POMODORO</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
