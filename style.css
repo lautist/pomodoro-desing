@@ -85,3 +85,38 @@ body{
     background: rgb(66, 65, 65);
     border: 1.5px solid white;
 }
+/* FIN CRONOMETRO */
+
+/* TEMPORIZADOR */
+
+.timer-btn2{
+    display: flex;
+    flex-direction: column;
+    background: blue;
+    width: 50%;
+    text-align: center;
+}
+
+.btn-style{
+    display: flex;
+    flex-direction: row;    
+    width: 15%;
+    justify-content: center;
+    text-align: center;
+    margin: 5px auto;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 12px rgba(255, 0, 0, 0.658);
+}
+
+
+.btn-style:hover{
+    box-shadow: 0px 0px 12px red;
+}
+
+.btn-style:active{
+    background: rgba(255, 0, 0, 0.452);
+    box-shadow: -1px 2px 12px rgba(255, 0, 0, 0.658);
+}
+
+/* FIN TEMPORIZADOR */

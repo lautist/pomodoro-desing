@@ -1,10 +1,12 @@
-let centesima = 0;
+
+
+let centesimas = 0;
 let segundos = 0;
 let minutos = 0;
 let horas = 0;
 
-function inicio(){
-    control = setInterval(cronometro,10);
+function inicio(inicio){
+    control = setInterval(cronometro,11);
     document.getElementById("inicio").disabled = true;
 	document.getElementById("parar").disabled = false;
 	document.getElementById("continuar").disabled = true;
