@@ -5,18 +5,28 @@ let segundos = 0;
 let minutos = 0;
 let horas = 0;
 
+document.getElementById("inicio").style.border = "1px solid #A5C9CA"
+
 function inicio(inicio){
     control = setInterval(cronometro,11);
     document.getElementById("inicio").disabled = true;
 	document.getElementById("parar").disabled = false;
 	document.getElementById("continuar").disabled = true;
 	document.getElementById("reinicio").disabled = false;
+
+	document.getElementById("continuar").style.border = "none"
+	document.getElementById("inicio").style.border = "none"
+	document.getElementById("parar").style.border = "1px solid #A5C9CA"
+	document.getElementById("reinicio").style.border = "1px solid #A5C9CA"
 }
 
 function parar () {
 	clearInterval(control);
 	document.getElementById("parar").disabled = true;
 	document.getElementById("continuar").disabled = false;
+
+	document.getElementById("continuar").style.border = "1px solid #A5C9CA"
+	document.getElementById("parar").style.border = "none"
 }
 
 function reinicio () {
@@ -33,6 +43,11 @@ function reinicio () {
 	document.getElementById("parar").disabled = true;
 	document.getElementById("continuar").disabled = true;
 	document.getElementById("reinicio").disabled = true;
+
+	document.getElementById("parar").style.border = "none"
+	document.getElementById("reinicio").style.border = "none"
+	document.getElementById("continuar").style.border = "none"
+	document.getElementById("inicio").style.border = "1px solid #A5C9CA"
 }
 
 function cronometro () {

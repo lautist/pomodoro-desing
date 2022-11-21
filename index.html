@@ -7,11 +7,13 @@
     <title>Pomodoro-Desing</title>
     <script src="https://kit.fontawesome.com/a5022cea6f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <!-- FUENTE TIPOGRAFICA -->
+    <!-- FIN FUENTE -->
 </head>
 <body>
     <!-- TITLE -->
     <div class="title">
-
+        <h1 class="title-pomodoro">POMODORO</h1>
     </div>
     <!-- NAV -->
     <div class="nav">
@@ -22,8 +24,9 @@
     <!-- CARD -->
 
     <div class="cards">
+        <!-- CRONOMETRO -->
         <div class="card c1">
-            <p class="crono-p">CRONOMETRO</p>
+            <p class="crono-p"><i class="fa-solid fa-stopwatch"></i> CRONOMETRO</p>
 
             <div class="contenedor">
                 
@@ -39,44 +42,42 @@
                 <input type="button" class="boton" id="reinicio" value="Reset &#8635;" onclick="reinicio();" disabled>
             </div>
         </div>
+        <!-- CRONOMETRO END -->
+        <!-- TEMPORIZADOR -->
         <div class="card c2">
-            <p>TEMPORIZADOR</p>
-            <section class="section">
-	
-
+            <p class="temp-p"><i class="fa-solid fa-stopwatch-20"></i> TEMPORIZADOR</p>
+            <section class="section-t">
 				<div id="contenedorInputs" class="timer-content">
 					<div class="field">
-						
 						<div class="control">
 							<input  id="mintemp" type="number" placeholder="Minutos">
 						</div>
 					</div>
 					<div class="field">
-						
 						<div class="control">
 							<input id="segtemp" type="number" placeholder="Segundos">
 						</div>
 					</div>
 				</div>
+                <h2 id="tiempoRestante">00:00.0</h2>
 				<div class="timer-btn2">
-				<h2 id="tiempoRestante">00:00.0</h2>
-				<button id="btnIniciar" class="btn-style" ><span ><i class="fa-solid fa-play"></i></span></button>
-				<button id="btnPausar"  class="btn-style"><span><i class="fa-solid fa-pause"></i></span></button>
-				<button id="btnDetener"  class="btn-style"><span ><i class="fa-solid fa-stop"></i></span></button>
-				<br>
-				</div>
-			
-		
+                    
+                    <button id="btnIniciar" class="btn-style" ><span ><i class="fa-solid fa-play"></i></span></button>
+                    <button id="btnPausar"  class="btn-style"><span><i class="fa-solid fa-pause"></i></span></button>
+                    <button id="btnDetener"  class="btn-style" style="
+                    margin-left: 10px;"><span ><i class="fa-solid fa-stop"></i></span></button>
+                    <br>
+				</div>	
 	</section>
-
-
         </div>
+        <!-- TEMPORIZADOR END -->
+
         <div class="card c3">
             <p>POMODORO</p>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="cronometro.js"></script>
     <script src="temporizador.js"></script>
 </body>
 </html>

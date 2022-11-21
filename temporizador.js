@@ -9,14 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	let idInterval = null, diferenciaTemporal = 0,
 		fechaFuturo = null;
 
-	
-	
-
-
 	//OCULTA EL ELMENTO
 	const ocultarElemento = elemento => {
 		elemento.style.display = "none";
-	}
+	} 
 	//MUESTRA EL ELEMENTO 
 	const mostrarElemento = elemento => {
 		elemento.style.display = "";

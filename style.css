@@ -1,33 +1,41 @@
 body{
     margin: 0;
-    background: gray;
+    background: #2C3333;
 }
 
 /* title */
 .title{
     height: 70px;
     width: 100%;
-    background: red;
+    background: #2C3333;
+}
+.title-pomodoro{
+    padding: 15px 0px;
+    text-align: center;
+    margin: 0px;
+    color: #E7F6F2;
 }
 
 /* nav */
 .nav{
     height: 25px;
     width: 100%;
-    background: blue;
+    background: #395B64;
     display: flex;
+    border-bottom: 2px solid #253b3b;
+    border-top: 2px solid #253b3b;
 }
 
 .selection{
-    background: green;
+    background: #395B64;
     height: 25px;
     width: 90%;
 }
 .social{
-    background: rgb(80, 52, 80);
+    background: #A5C9CA;
     height: 25px;
     width: 10%;
-
+   
 }
 
 /* card */
@@ -36,33 +44,43 @@ body{
 }
 .card{
     border-radius: 25px;
-    box-shadow: 0px 0px 10px 1px black;
+    box-shadow: 0px 0px 10px 1px #91363c;
     height: 250px;
     width: 30%;
-    background: blue;
-    margin: 10px auto;
+    background: #395B64;
+    margin: 23px auto;
+    transition: 0.8s box-shadow, background 3s;
+}
+.card:hover{
+    box-shadow: 0px 0px 15px 1px #c72d37; 
+    background: #324e57;
 }
 /* Cronometro */
 .crono-p{
-    /* border-radius: 0px 20px 0px 0px; */
-    margin: 22px 0px 25px 0px;
+    margin: 22px 0px 10px 0px;
     padding-top: 10px;
     height: 40px;
     font-size: 30px;
     text-align: center;
-    background-color: red;
+    /* background-color: #A5C9CA; */
+    color: white;
+}
+.img-cronometro{
+    height: 30px;
+    width: 25px;
 }
 .contenedor{
     display: flex;
-    margin: 5px 0px 10px 0px;
+    margin: 5px 0px 20px 0px;
     width: 100%;
-    background: white;
+    /* background: #A5C9CA; */
     justify-content: center;
 }
 
 .reloj{
-    background: white;
+    /* background: #A5C9CA; */
     font-size: 50px;
+    color: #E7F6F2;
 }
 .timer-btn{
     margin: 10px 0px;
@@ -76,47 +94,96 @@ body{
     border: 1ps black solid;
     height: 30px;
     width: 100%;
-    background: black;
+    background: #2C3333;
     color: white;
     transition: border-radius 0.8s, background 0.8s, border 0.8s;
+    cursor: pointer;
 }
 .boton:hover{
     border-radius: 1.8px;
     background: rgb(66, 65, 65);
     border: 1.5px solid white;
 }
+.boton:active{
+        transition: background 0.1s, box-shadow 0.1s;
+        background: rgba(255, 0, 0, 0.452);
+        box-shadow: -1px 2px 12px rgba(255, 0, 0, 0.658);
+}
 /* FIN CRONOMETRO */
 
 /* TEMPORIZADOR */
-
-.timer-btn2{
+.temp-p{
+    /* border-radius: 0px 20px 0px 0px; */
+    margin: 22px 0px 15px 0px;
+    padding-top: 10px;
+    height: 40px;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    /* background-color: red; */
+}
+.section-t{
     display: flex;
     flex-direction: column;
-    background: blue;
-    width: 50%;
+    margin: 0px auto;
+}
+.timer-content{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    margin: 1px auto;
+
+}
+#mintemp, #segtemp{
+    height: 25px;
     text-align: center;
+    margin: 3px 0px;
+    border-radius: 5px;
+    border: none;
+    width: 90%;
+}
+
+.timer-btn2{
+    
+    display: flex;
+    /* flex-direction: column; */
+    width: 60%;
+    text-align: center;
+    margin: 0px auto;
+    
 }
 
 .btn-style{
+    cursor: pointer;;
+    color: white;
+    background: #2C3333 ;
+    padding: 5px;
     display: flex;
     flex-direction: row;    
-    width: 15%;
+    width: 50%;
     justify-content: center;
     text-align: center;
-    margin: 5px auto;
+    margin: 1px auto;
     border-radius: 5px;
     border: none;
-    box-shadow: 0px 0px 12px rgba(255, 0, 0, 0.658);
+    transition: 0.8s border, border-radius 0.8s;
 }
 
 
 .btn-style:hover{
-    box-shadow: 0px 0px 12px red;
+    border: #E7F6F2 1px solid;
+    border-radius: 0px;
 }
 
 .btn-style:active{
     background: rgba(255, 0, 0, 0.452);
     box-shadow: -1px 2px 12px rgba(255, 0, 0, 0.658);
+}
+
+#tiempoRestante{
+    font-size: 35px;
+    margin: 5px auto;
+    color: #E7F6F2;
 }
 
 /* FIN TEMPORIZADOR */
