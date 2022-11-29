@@ -145,7 +145,7 @@ body{
 
 .timer-btn2{
     
-    display: flex;
+    /* display: flex; */
     /* flex-direction: column; */
     width: 60%;
     text-align: center;
