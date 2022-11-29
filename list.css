@@ -5,6 +5,7 @@
 }
 
 .principal {
+    border-radius: 10px;
     border-top: 1px solid white;
     background: #395B64;	
 	color: #fff;
