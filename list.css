@@ -2,21 +2,17 @@
 .wrap {
 	margin: 10px auto;
 	width: 50%;
-    /* background: #395B64; */
 }
 
 .principal {
+    border-top: 1px solid white;
     background: #395B64;	
 	color: #fff;
 	padding: 50px 0;
 	width: 100%;
     margin: 10px auto;
+    border-bottom: 1px solid white;
 }
-
-/* .principal .formulario {
-	color: red;
-	text-align: center;
-} */
 
 .principal .formulario input[type=text] {
 	margin-bottom: 20px;
@@ -39,7 +35,6 @@ width: 30%;
 justify-content: center;
 padding: 5px;
 border-radius: 5px;
-border: 1ps black solid;
 background: #2C3333;
 color: white;
 transition: border-radius 0.8s, background 0.8s, border 0.8s;
@@ -48,9 +43,7 @@ cursor: pointer;
 .btn-list:hover{
         border-radius: 1.8px;
         background: rgb(66, 65, 65);
-        border: 1.5px solid red;
-        box-shadow: 0px 0px 5px #D32F2F;
-        padding: 7px;
+        border: 2px solid white;
 }
 
 .formulario{
@@ -58,25 +51,18 @@ cursor: pointer;
     text-align: center;
     justify-content: center;
 }
-/* - Tareas - */
 
 .tareas  {
 	list-style: none;
-    /* width: 100%; */
-    /* background: #395B64; */
     padding: 10px;
-    /* margin: 10px auto; */
 }
 .lista{
     list-style: none;
     margin: 10px auto;
     width: 100%;
-    /* background: #395B64; */
     padding: 10px;
     text-align: center;
 }
-
-
 
 li{
     background: #395B64;
@@ -90,8 +76,6 @@ li{
 .tareas .lista li a {
     background: #395B64;
 	color: white;
-	/* display: block; */
-	/* padding: 20px 0; */
 	text-decoration: none;
     transition: background 0.8s;
 }  

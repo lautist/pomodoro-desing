@@ -8,6 +8,7 @@
     <script src="https://kit.fontawesome.com/a5022cea6f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="list.css">
+    <link rel="stylesheet" href="pomodoro.css">
     <!-- FUENTE TIPOGRAFICA -->
     <!-- FIN FUENTE -->
 </head>
@@ -74,7 +75,25 @@
         <!-- TEMPORIZADOR END -->
 
         <div class="card c3">
-            <p>POMODORO</p>
+            <div id="pomodoro-app">
+                <div id="container">
+                  <div id="timer">
+                    <div id="time">
+                      <span id="minutes">25</span>
+                      <span id="colon">:</span>
+                      <span id="seconds">00</span>
+                    </div>
+                  </div>
+              
+                  <div id="buttons">
+                    <button id="work" class="btn-pm">Pomodoro</button>
+                    <button id="shortBreak" class="btn-pm">Corto</button>
+                    <button id="longBreak" class="btn-pm">Largo</button>
+                    <button id="stop-pm" class="btn-pm">Reiniciar</button>
+                  </div>
+                </div>
+              </div>
+            
         </div>
     </div>
 <!-- LISTA PARA HACER -->
@@ -91,9 +110,7 @@
         <div class="tareas">
             <div class="wrap">
                 <ul class="lista" id="lista">
-                    <li><a href="#">1 Lorem ipsum dolor sit amet.</a></li>
-                    <li><a href="#">2 Lorem ipsum dolor sit amet.</a></li>
-                    <li><a href="#">3 Lorem ipsum dolor sit amet.</a></li>
+                    <li><a href="#">Tarea 1</a></li>
                 </ul>
             </div>
         </div>
@@ -102,5 +119,7 @@
     <script src="cronometro.js"></script>
     <script src="temporizador.js"></script>
     <script src="list.js"></script>
+    <script src="pomodoro.js"></script>
+
 </body>
 </html>

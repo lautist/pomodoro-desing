@@ -80,4 +80,6 @@ function cronometro () {
 		if (horas < 10) { horas = "0"+horas }
 		Horas.innerHTML = horas;
 	}
+
+	
 }
