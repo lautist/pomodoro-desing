@@ -18,10 +18,11 @@
 	margin-bottom: 20px;
 	padding: 10px 0px 10px 0px; 
 	width: 100%;
-    margin: 10px 0px;
+    margin: 10px auto;
     justify-content: center;
     align-items: center;
     border: 0px solid ;
+    text-align: center;
 
 }
 /* CUANDO DA ERROR SE RESALTA */
@@ -52,6 +53,7 @@ cursor: pointer;
 
 .formulario{
     background: #395B64;
+    
 }
 
 .tareas  {
@@ -62,6 +64,10 @@ cursor: pointer;
     padding: 0px;
 }
 
+#tareaInput{
+    
+}
+
 li{
     font-size: 20px;
     text-align: center;
@@ -69,7 +75,7 @@ li{
     padding: 10px 0px 10px 0px;
     border-bottom: 1px solid red;
     border-radius: 5px;
-    margin: 15px 0px;
+    margin: 15px 20px;
 }
 
 .tareas .lista li a {
