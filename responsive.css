@@ -112,10 +112,6 @@
         align-items: center;
         margin: 10px auto;
     }
-    li{
-        width: 100%;
-        text-align: center;
-        padding: 12.5px 0px;
-    }
+    
 }
 /* FIN LISTA RESPONSIVE */

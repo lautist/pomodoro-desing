@@ -9,7 +9,7 @@
     background: #395B64;	
 	color: #fff;
 	padding: 50px 0;
-	width: 100%;
+	width: 95%;
     margin: 10px auto;
     border-bottom: 1px solid white;
 }
@@ -75,7 +75,8 @@ li{
     padding: 10px 0px 10px 0px;
     border-bottom: 1px solid red;
     border-radius: 5px;
-    margin: 15px 20px;
+    margin: 10px auto;
+    width: 85%;
 }
 
 .tareas .lista li a {
