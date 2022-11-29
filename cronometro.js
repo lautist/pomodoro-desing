@@ -1,8 +1,8 @@
 
 
 let centesimas = 0;
-let segundos = 0;
-let minutos = 0;
+let segundosr = 0;
+let minutosr = 0;
 let horas = 0;
 
 document.getElementById("inicio").style.border = "1px solid #A5C9CA"
@@ -32,8 +32,8 @@ function parar () {
 function reinicio () {
 	clearInterval(control);
 	centesimas = 0;
-	segundos = 0;
-	minutos = 0;
+	segundosr = 0;
+	minutosr = 0;
 	horas = 0;
 	Centesimas.innerHTML = ":00";
 	Segundos.innerHTML = ":00";
@@ -60,22 +60,22 @@ function cronometro () {
 		centesimas = -1;
 	}
 	if (centesimas == 0) {
-		segundos ++;
-		if (segundos < 10) { segundos = "0"+segundos }
-		Segundos.innerHTML = ":"+segundos;
+		segundosr ++;
+		if (segundosr < 10) { segundosr = "0"+segundosr }
+		Segundos.innerHTML = ":"+segundosr;
 	}
-	if (segundos == 59) {
-		segundos = -1;
+	if (segundosr == 59) {
+		segundosr = -1;
 	}
-	if ( (centesimas == 0)&&(segundos == 0) ) {
-		minutos++;
-		if (minutos < 10) { minutos = "0"+minutos }
-		Minutos.innerHTML = ":"+minutos;
+	if ( (centesimas == 0)&&(segundosr == 0) ) {
+		minutosr++;
+		if (minutosr < 10) { minutosr = "0"+minutosr }
+		Minutos.innerHTML = ":"+minutosr;
 	}
-	if (minutos == 59) {
-		minutos = -1;
+	if (minutosr == 59) {
+		minutosr = -1;
 	}
-	if ( (centesimas == 0)&&(segundos == 0)&&(minutos == 0) ) {
+	if ( (centesimas == 0)&&(segundosr == 0)&&(minutosr == 0) ) {
 		horas ++;
 		if (horas < 10) { horas = "0"+horas }
 		Horas.innerHTML = horas;
