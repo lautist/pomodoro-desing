@@ -113,6 +113,12 @@
        }
 }
 
+@media screen and (max-width: 349px){
+    #timer{
+        font-size: 35px;
+    }
+}
+
 /* FIN RESPONSIVE POMODORO */
 
 /* LISTA RESPONSIVE */

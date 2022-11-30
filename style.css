@@ -28,15 +28,19 @@ body{
 
 .selection{
     background: #395B64;
-    height: 25px;
-    width: 90%;
+    height: 30px;
+    width: 100%;
+    font-size: 25px;
+    text-align: center;
+    color:white;
+    letter-spacing: 2px;
 }
-.social{
+/* .social{
     background: #395B64;
     height: 25px;
     width: 10%;
    
-}
+} */
 
 /* card */
 .cards{
