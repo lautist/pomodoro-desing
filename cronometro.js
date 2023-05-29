@@ -1,86 +1,85 @@
-
-
-let centesimas = 0;
-let segundosr = 0;
-let minutosr = 0;
+let centesimasActuales = 0;
+let segundosRestantes = 0;
+let minutosRestantes = 0;
 let horas = 0;
+const MAX_CENTESIMAS = 99;
+const MAX_SEGUNDOS = 59;
+const MAX_MINUTOS = 59;
 
-document.getElementById("inicio").style.border = "1px solid #A5C9CA"
+document.getElementById("inicio").style.border = "1px solid #A5C9CA";
 
-function inicio(inicio){
-    control = setInterval(cronometro,11);
-    document.getElementById("inicio").disabled = true;
+function inicio() {
+	control = setInterval(cronometro, 11);
+	document.getElementById("inicio").disabled = true;
 	document.getElementById("parar").disabled = false;
 	document.getElementById("continuar").disabled = true;
 	document.getElementById("reinicio").disabled = false;
 
-	document.getElementById("continuar").style.border = "none"
-	document.getElementById("inicio").style.border = "none"
-	document.getElementById("parar").style.border = "1px solid #A5C9CA"
-	document.getElementById("reinicio").style.border = "1px solid #A5C9CA"
+	document.getElementById("continuar").style.border = "none";
+	document.getElementById("inicio").style.border = "none";
+	document.getElementById("parar").style.border = "1px solid #A5C9CA";
+	document.getElementById("reinicio").style.border = "1px solid #A5C9CA";
 }
 
-function parar () {
+function parar() {
 	clearInterval(control);
 	document.getElementById("parar").disabled = true;
 	document.getElementById("continuar").disabled = false;
 
-	document.getElementById("continuar").style.border = "1px solid #A5C9CA"
-	document.getElementById("parar").style.border = "none"
+	document.getElementById("continuar").style.border = "1px solid #A5C9CA";
+	document.getElementById("parar").style.border = "none";
 }
 
-function reinicio () {
+function reinicio() {
 	clearInterval(control);
-	centesimas = 0;
-	segundosr = 0;
-	minutosr = 0;
+	centesimasActuales = 0;
+	segundosRestantes = 0;
+	minutosRestantes = 0;
 	horas = 0;
-	Centesimas.innerHTML = ":00";
-	Segundos.innerHTML = ":00";
-	Minutos.innerHTML = ":00";
-	Horas.innerHTML = "00";
+	actualizarElementosDOM();
 	document.getElementById("inicio").disabled = false;
 	document.getElementById("parar").disabled = true;
 	document.getElementById("continuar").disabled = true;
 	document.getElementById("reinicio").disabled = true;
 
-	document.getElementById("parar").style.border = "none"
-	document.getElementById("reinicio").style.border = "none"
-	document.getElementById("continuar").style.border = "none"
-	document.getElementById("inicio").style.border = "1px solid #A5C9CA"
+	document.getElementById("parar").style.border = "none";
+	document.getElementById("reinicio").style.border = "none";
+	document.getElementById("continuar").style.border = "none";
+	document.getElementById("inicio").style.border = "1px solid #A5C9CA";
 }
 
-function cronometro () {
-	if (centesimas < 99) {
-		centesimas++;
-		if (centesimas < 10) { centesimas = "0"+centesimas }
-		Centesimas.innerHTML = ":"+centesimas;
+function cronometro() {
+	centesimasActuales++;
+	if (centesimasActuales < 10) {
+		centesimasActuales = "0" + centesimasActuales;
 	}
-	if (centesimas == 90) {
-		centesimas = -1;
+	if (centesimasActuales === MAX_CENTESIMAS) {
+		centesimasActuales = 0;
+		segundosRestantes++;
+		if (segundosRestantes < 10) {
+			segundosRestantes = "0" + segundosRestantes;
+		}
 	}
-	if (centesimas == 0) {
-		segundosr ++;
-		if (segundosr < 10) { segundosr = "0"+segundosr }
-		Segundos.innerHTML = ":"+segundosr;
+	if (segundosRestantes === MAX_SEGUNDOS) {
+		segundosRestantes = 0;
+		minutosRestantes++;
+		if (minutosRestantes < 10) {
+			minutosRestantes = "0" + minutosRestantes;
+		}
 	}
-	if (segundosr == 59) {
-		segundosr = -1;
+	if (minutosRestantes === MAX_MINUTOS) {
+		minutosRestantes = 0;
+		horas++;
+		if (horas < 10) {
+			horas = "0" + horas;
+		}
 	}
-	if ( (centesimas == 0)&&(segundosr == 0) ) {
-		minutosr++;
-		if (minutosr < 10) { minutosr = "0"+minutosr }
-		Minutos.innerHTML = ":"+minutosr;
-	}
-	if (minutosr == 59) {
-		minutosr = -1;
-	}
-	if ( (centesimas == 0)&&(segundosr == 0)&&(minutosr == 0) ) {
-		horas ++;
-		if (horas < 10) { horas = "0"+horas }
-		Horas.innerHTML = horas;
-	}
-
-	
+	actualizarElementosDOM();
 }
 
+function actualizarElementosDOM() {
+	document.getElementById("Centesimas").innerHTML = ":" + centesimasActuales;
+	document.getElementById("Segundos").innerHTML = ":" + segundosRestantes;
+	document.getElementById("Minutos").innerHTML = ":" + minutosRestantes;
+	document.getElementById("Horas").innerHTML = horas;
+}
