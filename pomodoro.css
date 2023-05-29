@@ -19,7 +19,7 @@
   .btn-pm{
     margin-top: 2px;
     border-radius: 5px;
-    border: 1px white solid;
+    border: none;
     background: #2C3333;
     color: white;
     cursor: pointer;
@@ -30,7 +30,7 @@
   .btn-pm:hover{
     border-radius: 1.8px;
     background: rgb(66, 65, 65);
-    border: 1.5px solid white;
+    transition: 0.7s;
 }
  
   
