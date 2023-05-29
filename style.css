@@ -184,3 +184,17 @@ body{
 }
 
 /* FIN TEMPORIZADOR */
+
+
+footer{
+    text-align: center;
+    height: auto;
+    padding: 5px 0;
+    background: #395B64;
+    color: white;
+    border-top: white 1px  solid;
+}
+    footer a{
+        text-decoration: none;
+        color: white;
+    }   footer a:hover{color: rgb(255, 198, 198);}
