@@ -4,7 +4,7 @@
     const elements = {
         timeRemaining: getElement("time-remaining"),
         startBtn: getElement("start-timer"),
-        pauseBtn: getElement("pause-timer"),
+        pauseBtn: getElement("pause-timer"), // El botón de pausar
         stopBtn: getElement("stop-timer"),
         minInput: getElement("min-timer"),
         secInput: getElement("sec-timer"),
@@ -12,8 +12,8 @@
     };
 
     let intervalId = null;
-    let timeFuture = null; // Usar timeFuture en lugar de fechaFuturo
-    let temporalDifference = 0; // Usar temporalDifference en lugar de diferenciaTemporal
+    let timeFuture = null;
+    let temporalDifference = 0;
 
     const hideElement = (element) => {
         element.style.display = "none";
@@ -28,15 +28,17 @@
     const millisecondsToMinutesAndSeconds = (ms) => {
         const totalSeconds = ms / 1000;
         const minutes = parseInt(totalSeconds / 60);
-        const seconds = (totalSeconds % 60).toFixed(1); // Mantener un decimal para centésimas
+        const seconds = (totalSeconds % 60).toFixed(1);
         return `${formatValue(minutes)}:${formatValue(seconds)}`;
     };
 
     const startTimer = (initialMinutes, initialSeconds) => {
         hideElement(elements.inputGroup);
         showElement(elements.pauseBtn);
+        elements.pauseBtn.disabled = false; // <--- HABILITAR el botón de pausar aquí
         hideElement(elements.startBtn);
-        hideElement(elements.stopBtn);
+        elements.stopBtn.disabled = false; // Asegurar que el stop esté habilitado si se muestra
+        showElement(elements.stopBtn); // Mostrar el botón de detener al iniciar también
 
         if (timeFuture && temporalDifference > 0) { // Si se está reanudando
             timeFuture = new Date().getTime() + temporalDifference;
@@ -53,20 +55,25 @@
             if (remainingTime <= 0) {
                 clearInterval(intervalId);
                 hideElement(elements.pauseBtn);
-                showElement(elements.stopBtn); // Mostrar el botón de stop al finalizar
-                elements.timeRemaining.textContent = "00:00.0"; // Asegurar que muestre 00:00.0
+                elements.pauseBtn.disabled = true; // Deshabilitar pause al finalizar
+                // El botón de stop ya está visible.
+                elements.timeRemaining.textContent = "00:00.0";
                 // Opcional: Sonido de finalización
+                stopTimer(); // Llamar a stopTimer para reiniciar completamente el estado
             } else {
                 elements.timeRemaining.textContent = millisecondsToMinutesAndSeconds(remainingTime);
             }
-        }, 50); // Intervalo de 50ms para una actualización fluida sin ser excesiva
+        }, 50);
     };
 
     const pauseTimer = () => {
         hideElement(elements.pauseBtn);
+        elements.pauseBtn.disabled = true; // <--- DESHABILITAR el botón de pausar al pausar
         showElement(elements.startBtn);
+        elements.startBtn.disabled = false; // Habilitar botón de iniciar (reanudar)
         showElement(elements.stopBtn);
-        temporalDifference = timeFuture - new Date().getTime(); // Guardar la diferencia
+        elements.stopBtn.disabled = false; // Habilitar botón de detener
+        temporalDifference = timeFuture - new Date().getTime();
         clearInterval(intervalId);
     };
 
@@ -75,7 +82,7 @@
         timeFuture = null;
         temporalDifference = 0;
         elements.timeRemaining.textContent = "00:00.0";
-        initTimer(); // Reiniciar al estado inicial
+        initTimer(); // Vuelve al estado inicial, que deshabilitará todos los botones excepto el de iniciar
     };
 
     const initTimer = () => {
@@ -83,8 +90,13 @@
         elements.secInput.value = "";
         showElement(elements.inputGroup);
         showElement(elements.startBtn);
+        elements.startBtn.disabled = false; // Asegurar que el botón de iniciar esté habilitado
+
         hideElement(elements.pauseBtn);
+        elements.pauseBtn.disabled = true; // <--- DESHABILITAR el botón de pausar en la inicialización
+
         hideElement(elements.stopBtn);
+        elements.stopBtn.disabled = true; // <--- DESHABILITAR el botón de detener en la inicialización
     };
 
     const startClickHandler = () => {
