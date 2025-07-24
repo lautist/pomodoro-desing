@@ -1,0 +1,266 @@
+:root {
+    --primary-bg-color: #2C3333;
+    --secondary-bg-color: #395B64;
+    --text-color: #E7F6F2;
+    --accent-color: #A5C9CA; /* Usado para algunos bordes */
+    --hover-bg-color: rgb(66, 65, 65);
+    --active-color: rgba(255, 0, 0, 0.452);
+    --shadow-color: rgba(255, 0, 0, 0.658);
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--primary-bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: var(--primary-bg-color);
+    padding: 15px 0;
+    text-align: center;
+}
+
+.header__title {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 2.5em;
+}
+
+/* Nav */
+.nav {
+    background: var(--secondary-bg-color);
+    padding: 10px 0;
+    text-align: center;
+    border-top: 2px solid #253b3b;
+    border-bottom: 2px solid #253b3b;
+}
+
+.nav__date {
+    font-size: 1.2em;
+    color: var(--text-color);
+    letter-spacing: 1px;
+}
+
+/* Main Content (Cards Container) */
+.main-content {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en pantallas pequeñas */
+    justify-content: center;
+    gap: 20px; /* Espacio entre las tarjetas */
+    padding: 20px;
+    flex-grow: 1; /* Permite que el contenido principal ocupe el espacio restante */
+}
+
+/* Card General */
+.card {
+    background: var(--secondary-bg-color);
+    border-radius: 15px; /* Bordes más suaves */
+    padding: 20px;
+    width: 30%; /* Ancho base para las tarjetas */
+    min-width: 280px; /* Ancho mínimo para evitar que se pongan demasiado pequeñas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Pequeño efecto de elevación */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0px 0px 7px 0px #c72d37; /* Sombra más pronunciada y color de acento */
+}
+
+.card__title {
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+/* Stopwatch & Timer Display */
+.stopwatch,
+.pomodoro-timer__display {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    font-size: 3em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.stopwatch__time,
+.pomodoro-timer__display span {
+    padding: 0 5px;
+}
+
+.stopwatch__time:first-child {
+    font-size: 0.8em; /* Horas un poco más pequeñas */
+}
+
+.timer__countdown {
+    font-size: 2.5em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+.timer-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.timer-input input[type="number"] {
+    background-color: var(--text-color); /* Fondo claro para los inputs */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 80px;
+    text-align: center;
+    font-size: 1em;
+    color: var(--primary-bg-color); /* Texto oscuro en el input */
+}
+
+.timer-input input[type="number"]::placeholder {
+    color: var(--secondary-bg-color);
+}
+
+/* Buttons General */
+.card__actions {
+    display: flex;
+    flex-wrap: wrap; /* Envuelve los botones si no hay espacio */
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    width: 100%;
+}
+
+.button {
+    background: var(--primary-bg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+    flex-grow: 1; /* Permite que los botones se expandan */
+    min-width: 100px; /* Ancho mínimo para los botones */
+}
+
+.button:hover {
+    background: var(--hover-bg-color);
+    transform: translateY(-2px);
+}
+
+.button:active {
+    background: var(--active-color);
+    box-shadow: -1px 2px 12px var(--shadow-color);
+    transform: translateY(0);
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #444; /* Un gris más oscuro para deshabilitados */
+    box-shadow: none;
+    transform: none;
+}
+
+/* Specific button adjustments for timer play/pause/stop */
+.card--timer .button {
+    padding: 10px; /* Iconos más cuadrados */
+}
+
+/* To-Do List */
+.todo-list-section {
+    background: var(--secondary-bg-color);
+    border-radius: 15px;
+    margin: 20px auto;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px; /* Ancho máximo para la lista de tareas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.todo-list__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#todo-input {
+    width: 90%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--text-color);
+    color: var(--primary-bg-color);
+    font-size: 1.1em;
+    text-align: center;
+}
+
+#todo-input.error {
+    border: 2px solid #D32F2F;
+    color: #D32F2F;
+}
+
+.button--list {
+    width: 60%;
+    max-width: 200px; /* Ancho máximo para el botón de la lista */
+    padding: 12px 20px;
+    font-size: 1.1em;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-list li {
+    background: var(--primary-bg-color); /* Las tareas tienen un fondo más oscuro */
+    color: var(--text-color);
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s ease, text-decoration 0.3s ease;
+}
+
+.todo-list li:hover {
+    background: var(--hover-bg-color);
+    text-decoration: line-through red;
+}
+
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px 0;
+    background: var(--secondary-bg-color);
+    color: var(--text-color);
+    border-top: 1px solid var(--text-color);
+    margin-top: auto; /* Empuja el footer hacia abajo */
+}
+
+.footer a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: rgb(255, 198, 198);
+}

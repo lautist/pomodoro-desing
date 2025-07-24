@@ -6,128 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro-Desing</title>
     <script src="https://kit.fontawesome.com/a5022cea6f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="list.css">
-    <link rel="stylesheet" href="pomodoro.css">
-    <link rel="stylesheet" href="responsive.css">
-    <!-- FUENTE TIPOGRAFICA -->
-    <!-- FIN FUENTE -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <!-- TITLE -->
-    <div class="title">
-        <h1 class="title-pomodoro">POMODORO</h1>
-    </div>
-    <!-- NAV -->
-    <div class="nav">
-        <div class="selection"></div>
-        <!-- <div class="social"></div> -->
-    </div>
+    <header class="header">
+        <h1 class="header__title">POMODORO</h1>
+    </header>
 
-    <!-- CARD -->
+    <nav class="nav">
+        <div class="nav__date" id="current-date"></div>
+    </nav>
 
-    <div class="cards">
-        <!-- CRONOMETRO -->
-        <div class="card c1">
-            <p class="crono-p"><i class="fa-solid fa-stopwatch"></i> CRONOMETRO</p>
-
-            <div class="contenedor">
-                
-                <div class="reloj" id="Horas">00</div>
-                <div class="reloj" id="Minutos">:00</div>
-                <div class="reloj" id="Segundos">:00</div>
-                <div class="reloj" id="Centesimas">:00</div>
+    <main class="main-content">
+        <section class="card card--stopwatch">
+            <h2 class="card__title"><i class="fa-solid fa-stopwatch"></i> CRONÓMETRO</h2>
+            <div class="stopwatch">
+                <div class="stopwatch__time" id="horas">00</div>
+                <div class="stopwatch__time" id="minutos">:00</div>
+                <div class="stopwatch__time" id="segundos">:00</div>
+                <div class="stopwatch__time" id="centesimas">:00</div>
             </div>
-            <div class="timer-btn">
-                <input type="button" class="boton" id="inicio" value="Start &#9658;" onclick="inicio();">
-                <input type="button" class="boton" id="parar" value="Stop &#8718;" onclick="parar();" disabled>
-                <input type="button" class="boton" id="continuar" value="Resume &#8634;" onclick="inicio();" disabled>
-                <input type="button" class="boton" id="reinicio" value="Reset &#8635;" onclick="reinicio();" disabled>
+            <div class="card__actions">
+                <button class="button" id="start-stopwatch">Iniciar &#9658;</button>
+                <button class="button" id="pause-stopwatch" disabled>Pausar &#8718;</button>
+                <button class="button" id="resume-stopwatch" disabled>Reanudar &#8634;</button>
+                <button class="button" id="reset-stopwatch" disabled>Reiniciar &#8635;</button>
             </div>
-        </div>
-        <!-- CRONOMETRO END -->
-        <!-- TEMPORIZADOR -->
-        <div class="card c2">
-            <p class="temp-p"><i class="fa-solid fa-stopwatch-20"></i> TEMPORIZADOR</p>
-            <section class="section-t">
-				<div id="contenedorInputs" class="timer-content">
-					<div class="field">
-						<div class="control">
-							<input  id="mintemp" type="number" placeholder="Minutos">
-						</div>
-					</div>
-					<div class="field">
-						<div class="control">
-							<input id="segtemp" type="number" placeholder="Segundos">
-						</div>
-					</div>
-				</div>
-                <h2 id="tiempoRestante">00:00.0</h2>
-				<div class="timer-btn2">
-                    
-                    <button id="btnIniciar" class="btn-style" ><span ><i class="fa-solid fa-play"></i></span></button>
-                    <button id="btnPausar"  class="btn-style"><span><i class="fa-solid fa-pause"></i></span></button>
-                    <button id="btnDetener"  class="btn-style"><span ><i class="fa-solid fa-stop"></i></span></button>
-                    <br>
-				</div>	
-	        </section>
-        </div>
-        <!-- TEMPORIZADOR END -->
+        </section>
 
-        <div class="card c3">
-            <div id="pomodoro-app">
-                <div id="container">
-                  <div id="timer">
-                    <div id="time">
-                      <span id="minutes">25</span>
-                      <span id="colon">:</span>
-                      <span id="seconds">00</span>
-                    </div>
-                  </div>
-              
-                  <div id="buttons">
-                    <button id="work" class="btn-pm">Pomodoro</button>
-                    <button id="shortBreak" class="btn-pm">Corto</button>
-                    <button id="longBreak" class="btn-pm">Largo</button>
-                    <button id="stop-pm" class="btn-pm">Reiniciar</button>
-                  </div>
+        <section class="card card--timer">
+            <h2 class="card__title"><i class="fa-solid fa-stopwatch-20"></i> TEMPORIZADOR</h2>
+            <div class="timer-input-group" id="timer-input-group">
+                <div class="timer-input">
+                    <input id="min-timer" type="number" placeholder="Minutos" min="0">
                 </div>
-              </div>
-            
-        </div>
-    </div>
-<!-- LISTA PARA HACER -->
-    <div class="list-prog">
-        <div class="principal">
-            <div class="wrap">
-                <form class="formulario" action="">
-                    <input type="text" id="tareaInput" placeholder="Agrega tu tarea">
-                    <input type="button" class="btn-list" id="btn-agregar" value="Agregar Tarea">
-                </form>
+                <div class="timer-input">
+                    <input id="sec-timer" type="number" placeholder="Segundos" min="0">
+                </div>
             </div>
+            <h3 class="timer__countdown" id="time-remaining">00:00.0</h3>
+            <div class="card__actions">
+                <button class="button" id="start-timer"><span ><i class="fa-solid fa-play"></i></span></button>
+                <button class="button" id="pause-timer" disabled><span><i class="fa-solid fa-pause"></i></span></button>
+                <button class="button" id="stop-timer" disabled><span><i class="fa-solid fa-stop"></i></span></button>
+            </div>
+        </section>
+
+        <section class="card card--pomodoro">
+            <h2 class="card__title"><i class="fa-solid fa-hourglass-half"></i> POMODORO</h2>
+            <div class="pomodoro-timer">
+                <div class="pomodoro-timer__display">
+                    <span id="pomodoro-minutes">25</span>
+                    <span class="pomodoro-timer__colon">:</span>
+                    <span id="pomodoro-seconds">00</span>
+                </div>
+            </div>
+            <div class="card__actions">
+                <button class="button" id="pomodoro-work">Pomodoro</button>
+                <button class="button" id="pomodoro-short-break">Corto</button>
+                <button class="button" id="pomodoro-long-break">Largo</button>
+                <button class="button" id="pomodoro-reset">Reiniciar</button>
+            </div>
+        </section>
+    </main>
+
+    <section class="todo-list-section">
+        <div class="todo-list__wrap">
+            <form class="todo-list__form">
+                <input type="text" id="todo-input" placeholder="Agrega tu tarea">
+                <button type="submit" class="button button--list" id="add-todo-btn">Agregar Tarea</button>
+            </form>
         </div>
-    
-        <div class="tareas">
-            <div class="wrap">
-                <ul class="lista" id="lista">
-                    <!-- <li><a href="#"></a></li> -->
+        <div class="todo-list__wrap">
+            <ul class="todo-list" id="todo-list">
                 </ul>
-            </div>
         </div>
-    </div>
+    </section>
 
-
-
-<!-- LISTA PARA HACER END -->
-    <footer>
-        <a href="https://github.com/lautist">@lautist</a>
+    <footer class="footer">
+        <a href="https://github.com/lautist" target="_blank" rel="noopener noreferrer">@lautist</a>
     </footer>
-    <script src="cronometro.js"></script>
-    <script src="temporizador.js"></script>
-    <script src="pomodoro.js"></script>
-    <script src="list.js"></script>
-    <script src="timerprincipal.js"></script>
-    
 
+    <script src="js/cronometro.js"></script>
+    <script src="js/temporizador.js"></script>
+    <script src="js/pomodoro.js"></script>
+    <script src="js/list.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
