@@ -227,7 +227,8 @@ body {
 
 .todo-list li {
     background: var(--primary-bg-color); /* Las tareas tienen un fondo más oscuro */
-    color: var(--text-color);
+    text-decoration: none;
+    color: white;
     padding: 12px 20px;
     border-radius: 8px;
     margin-bottom: 10px;
@@ -237,6 +238,11 @@ body {
     font-size: 1.1em;
     cursor: pointer;
     transition: background 0.3s ease, text-decoration 0.3s ease;
+    
+}
+.todo-list li a{
+    text-decoration: none;
+    color: white;
 }
 
 .todo-list li:hover {
