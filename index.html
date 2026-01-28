@@ -53,36 +53,34 @@
             </div>
         </section>
 
-        <section class="card card--pomodoro">
+        <section class="card card--pomodoro" id="pomodoro-container">
             <h2 class="card__title"><i class="fa-solid fa-hourglass-half"></i> POMODORO</h2>
-            <div class="pomodoro-timer">
+            <div class="pomodoro-wrapper">
+                <svg class="progress-ring" viewBox="0 0 200 200">
+                    <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="transparent" r="90" cx="100" cy="100"/>
+                    <circle class="progress-ring__circle" stroke="var(--accent-color)" stroke-width="8" stroke-linecap="round" fill="transparent" r="90" cx="100" cy="100"/>
+                </svg>
                 <div class="pomodoro-timer__display">
-                    <span id="pomodoro-minutes">25</span>
-                    <span class="pomodoro-timer__colon">:</span>
-                    <span id="pomodoro-seconds">00</span>
+                    <span id="pomodoro-minutes">25</span><span class="pomodoro-timer__colon">:</span><span id="pomodoro-seconds">00</span>
                 </div>
             </div>
             <div class="card__actions">
-                <button class="button" id="pomodoro-work">Pomodoro</button>
+                <button class="button" id="pomodoro-work">Enfoque</button>
                 <button class="button" id="pomodoro-short-break">Corto</button>
                 <button class="button" id="pomodoro-long-break">Largo</button>
                 <button class="button" id="pomodoro-reset">Reiniciar</button>
             </div>
         </section>
-    </main>
 
-    <section class="todo-list-section">
-        <div class="todo-list__wrap">
-            <form class="todo-list__form">
+        <section class="card card--todo">
+            <h2 class="card__title"><i class="fa-solid fa-list-check"></i> TAREAS</h2>
+            <div class="todo-input-wrapper">
                 <input type="text" id="todo-input" placeholder="Agrega tu tarea">
-                <button type="submit" class="button button--list" id="add-todo-btn">Agregar Tarea</button>
-            </form>
-        </div>
-        <div class="todo-list__wrap">
-            <ul class="todo-list" id="todo-list">
-                </ul>
-        </div>
-    </section>
+                <button class="button" id="add-todo-btn"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <ul class="todo-list" id="todo-list"></ul>
+        </section>
+    </main>
 
     <footer class="footer">
         <a href="https://github.com/lautist" target="_blank" rel="noopener noreferrer">@lautist</a>

@@ -16,26 +16,31 @@
         }
     };
 
-    // Guardar tareas en localStorage
+// Guardar tareas en localStorage
     const saveTodos = () => {
-        const todos = Array.from(elements.todoList.children).map(li => li.textContent);
+        const todos = Array.from(elements.todoList.querySelectorAll("span")).map(span => span.textContent);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
     };
 
     // Crear un nuevo elemento de tarea en el DOM
     const createTodoElement = (todoText) => {
         const listItem = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = "#"; // El href puede ser solo un marcador
-        link.textContent = todoText;
+        
+        const span = document.createElement("span");
+        span.textContent = todoText;
 
-        listItem.appendChild(link);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        deleteBtn.setAttribute("aria-label", "Eliminar tarea");
+
+        listItem.appendChild(span);
+        listItem.appendChild(deleteBtn);
         elements.todoList.appendChild(listItem);
 
-        // Añadir evento para eliminar tarea
-        listItem.addEventListener("click", function() {
-            listItem.remove(); // Más directo que parentNode.removeChild(this)
-            saveTodos(); // Guardar después de eliminar
+        // Evento para eliminar tarea específico del botón
+        deleteBtn.addEventListener("click", function() {
+            listItem.remove();
+            saveTodos();
         });
     };
 
@@ -58,15 +63,11 @@
         saveTodos(); // Guardar la nueva tarea
     };
 
-    // Limpiar el estado de error del input al hacer clic
-    const clearInputError = () => {
-        elements.todoInput.classList.remove("error");
-        elements.todoInput.placeholder = "Agrega tu tarea";
-    };
-
     // Event Listeners
     elements.addTodoBtn.addEventListener("click", addTodo);
-    elements.todoInput.addEventListener("click", clearInputError);
+    elements.todoInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") addTodo(e);
+    });
 
     // Cargar tareas al cargar la página
     document.addEventListener("DOMContentLoaded", loadTodos);

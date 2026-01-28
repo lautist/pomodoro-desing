@@ -1,94 +1,180 @@
 (function() {
     const pomodoro = {
-        started: false,
-        minutes: 0,
-        seconds: 0,
+        state: {
+            timeLeft: 1500, // Segundos
+            duration: 1500,
+            isRunning: false,
+            mode: 'work',
+            startTime: null,
+            pausedTimeLeft: 1500
+        },
+        elements: {
+            minutes: document.querySelector('#pomodoro-minutes'),
+            seconds: document.querySelector('#pomodoro-seconds'),
+            circle: document.querySelector('.progress-ring__circle'),
+            container: document.querySelector('#pomodoro-container')
+        },
         interval: null,
-        minutesDom: null,
-        secondsDom: null,
-        // fillerDom: null, // Si no se usa para una barra visual, se puede eliminar
-        
-        init: function() {
-            this.minutesDom = document.querySelector('#pomodoro-minutes');
-            this.secondsDom = document.querySelector('#pomodoro-seconds');
-            // this.fillerDom = document.querySelector('#filler'); // Si no se usa, eliminar
+        radius: 90,
+        circumference: 2 * Math.PI * 90,
+        audio: new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg'),
 
-            // Inicia el intervalo principal que verifica el tiempo cada segundo
-            this.interval = setInterval(this.intervalCallback.bind(this), 1000);
+        init() {
+            this.elements.circle.style.strokeDasharray = `${this.circumference} ${this.circumference}`;
+            this.loadState();
+            this.requestNotificationPermission();
+            
+            document.querySelector('#pomodoro-work').onclick = () => this.setMode('work', 25);
+            document.querySelector('#pomodoro-short-break').onclick = () => this.setMode('short', 5);
+            document.querySelector('#pomodoro-long-break').onclick = () => this.setMode('long', 15);
+            document.querySelector('#pomodoro-reset').onclick = () => this.reset();
 
-            // Asignar eventos a los botones
-            document.querySelector('#pomodoro-work').onclick = this.startWork.bind(this);
-            document.querySelector('#pomodoro-short-break').onclick = this.startShortBreak.bind(this);
-            document.querySelector('#pomodoro-long-break').onclick = this.startLongBreak.bind(this);
-            document.querySelector('#pomodoro-reset').onclick = this.stopTimer.bind(this);
-        },
-
-        resetVariables: function(mins, secs, startedState) {
-            this.minutes = mins;
-            this.seconds = secs;
-            this.started = startedState;
-            // this.fillerIncrement = 200 / (this.minutes * 60); // Si no se usa, eliminar
-            // this.fillerHeight = 0; // Si no se usa, eliminar
-            this.updateDom(); // Actualizar el DOM inmediatamente después del reset
-        },
-
-        startWork: function() {
-            this.resetVariables(25, 0, true);
-        },
-
-        startShortBreak: function() {
-            this.resetVariables(5, 0, true);
-        },
-
-        startLongBreak: function() {
-            this.resetVariables(15, 0, true);
-        },
-
-        stopTimer: function() {
-            this.resetVariables(25, 0, false); // Vuelve al estado inicial del Pomodoro
-            // this.fillerHeight = 0; // Si no se usa, eliminar
-            // this.updateDom(); // Llamado dentro de resetVariables
-        },
-
-        toDoubleDigit: function(num) {
-            return num < 10 ? "0" + parseInt(num, 10) : num;
-        },
-
-        updateDom: function() {
-            this.minutesDom.innerHTML = this.toDoubleDigit(this.minutes);
-            this.secondsDom.innerHTML = this.toDoubleDigit(this.seconds);
-            // Si se implementa la barra de progreso:
-            // this.fillerHeight = this.fillerHeight + this.fillerIncrement;
-            // this.fillerDom.style.height = this.fillerHeight + 'px';
-        },
-
-        intervalCallback: function() {
-            if (!this.started) return; // Si el temporizador no está iniciado, no hace nada
-
-            if (this.seconds === 0) {
-                if (this.minutes === 0) {
-                    this.timerComplete();
-                    return;
+            // Sincronización cuando la pestaña vuelve a primer plano
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden && this.state.isRunning) {
+                    this.syncTimer();
                 }
-                this.seconds = 59;
-                this.minutes--;
-            } else {
-                this.seconds--;
-            }
-            this.updateDom();
+            });
         },
 
-        timerComplete: function() {
-            this.started = false;
-            // this.fillerHeight = 0; // Si no se usa, eliminar
-            // Opcional: Notificación o sonido de finalización
-            alert("¡Tiempo de Pomodoro completado!"); // Ejemplo de notificación
-            this.stopTimer(); // Vuelve a los 25 minutos después de completarse
+        requestNotificationPermission() {
+            if ("Notification" in window && Notification.permission === "default") {
+                Notification.requestPermission();
+            }
+        },
+
+        setMode(mode, mins) {
+            this.stop();
+            this.state.mode = mode;
+            this.state.duration = mins * 60;
+            this.state.timeLeft = this.state.duration;
+            this.state.pausedTimeLeft = this.state.duration;
+            this.state.startTime = Date.now();
+            
+            this.updateTheme();
+            this.start();
+            this.saveState();
+        },
+
+        updateTheme() {
+            const classes = ['mode-work', 'mode-short', 'mode-long'];
+            document.body.classList.remove(...classes);
+            document.body.classList.add(`mode-${this.state.mode}`);
+        },
+
+        start() {
+            if (this.state.isRunning) return;
+            this.state.isRunning = true;
+            this.state.startTime = Date.now();
+            this.state.pausedTimeLeft = this.state.timeLeft;
+
+            // Intervalo de alta frecuencia para suavidad visual
+            this.interval = setInterval(() => this.syncTimer(), 200);
+        },
+
+        syncTimer() {
+            const elapsed = Math.floor((Date.now() - this.state.startTime) / 1000);
+            this.state.timeLeft = this.state.pausedTimeLeft - elapsed;
+
+            if (this.state.timeLeft <= 0) {
+                this.complete();
+            } else {
+                this.updateDisplay();
+                // Guardado preventivo cada ciclo
+                if (Math.random() > 0.9) this.saveState(); 
+            }
+        },
+
+        stop() {
+            this.state.isRunning = false;
+            clearInterval(this.interval);
+            this.saveState();
+        },
+
+        reset() {
+            this.stop();
+            const mins = this.state.mode === 'work' ? 25 : (this.state.mode === 'short' ? 5 : 15);
+            this.state.timeLeft = mins * 60;
+            this.state.duration = this.state.timeLeft;
+            this.state.pausedTimeLeft = this.state.timeLeft;
+            this.updateDisplay();
+            this.saveState();
+        },
+
+        updateDisplay() {
+            const m = Math.floor(this.state.timeLeft / 60);
+            const s = this.state.timeLeft % 60;
+            
+            this.elements.minutes.textContent = String(Math.max(0, m)).padStart(2, '0');
+            this.elements.seconds.textContent = String(Math.max(0, s)).padStart(2, '0');
+            
+            const ratio = Math.max(0, this.state.timeLeft) / this.state.duration;
+            const offset = this.circumference - ratio * this.circumference;
+            this.elements.circle.style.strokeDashoffset = offset;
+        },
+
+        saveState() {
+            const data = {
+                ...this.state,
+                lastTimestamp: Date.now()
+            };
+            localStorage.setItem('pomodoro_v2_state', JSON.stringify(data));
+        },
+
+        loadState() {
+            const saved = localStorage.getItem('pomodoro_v2_state');
+            if (!saved) return;
+
+            const data = JSON.parse(saved);
+            const now = Date.now();
+            const elapsedSinceLastSave = Math.floor((now - data.lastTimestamp) / 1000);
+
+            this.state = data;
+            
+            if (this.state.isRunning) {
+                // Re-calculamos el tiempo restante basado en el desfase temporal
+                const newPausedTimeLeft = data.timeLeft - elapsedSinceLastSave;
+                
+                if (newPausedTimeLeft <= 0) {
+                    this.state.timeLeft = 0;
+                    this.state.isRunning = false;
+                    localStorage.removeItem('pomodoro_v2_state');
+                } else {
+                    this.state.pausedTimeLeft = newPausedTimeLeft;
+                    this.state.timeLeft = newPausedTimeLeft;
+                    this.state.startTime = now;
+                    this.start();
+                }
+            }
+            
+            this.updateTheme();
+            this.updateDisplay();
+        },
+
+        complete() {
+            this.stop();
+            this.state.timeLeft = 0;
+            this.updateDisplay();
+            this.audio.play().catch(() => {}); // Fallback si el usuario no ha interactuado aún
+            this.sendNotification();
+            localStorage.removeItem('pomodoro_v2_state');
+        },
+
+        sendNotification() {
+            const messages = {
+                work: "¡Sesión terminada! Es hora de descansar.",
+                short: "Descanso corto finalizado. ¿Volvemos?",
+                long: "Descanso largo completado. ¡Buen trabajo!"
+            };
+
+            if ("Notification" in window && Notification.permission === "granted") {
+                new Notification("Pomodoro Master", {
+                    body: messages[this.state.mode],
+                    icon: "https://cdn-icons-png.flaticon.com/512/2553/2553383.png"
+                });
+            }
         }
     };
 
-    // Inicializa el objeto pomodoro al cargar la ventana
-    window.addEventListener('load', () => {
-        pomodoro.init();
-    });
+    window.addEventListener('DOMContentLoaded', () => pomodoro.init());
 })();
